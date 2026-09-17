@@ -144,4 +144,4 @@ sha256sum "${OUT_NAME}" > "${OUT_NAME}.sha256"
 
 echo ""
 echo "==> Done."
-ls -lh "${OUT_DIR}/${OUT_NAME}" "${OUT_DIR}/${OUT_NAME}.sha256" "${OUT_DIR}/vmlinuz-dtb_spacewar"
+ls -lh "${OUT_DIR}/${OUT_NAME}" "${OUT_DIR}/${OUT_NAME}.sha256" "${OUT_DIR}/Image.gz-dtb_spacewar"
