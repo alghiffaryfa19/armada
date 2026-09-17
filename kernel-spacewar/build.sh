@@ -95,7 +95,7 @@ rm -rf "${STAGE}"
 mkdir -p "${STAGE}/lib/modules/${KVER}/dtb/qcom"
 
 echo "==> Staging vmlinuz + modules + DTBs"
-cp arch/arm64/boot/vmlinuz "${STAGE}/lib/modules/${KVER}/vmlinuz"
+cp arch/arm64/boot/Image "${STAGE}/lib/modules/${KVER}/vmlinuz"
 make "${MAKE_ARGS[@]}" INSTALL_MOD_PATH="${STAGE}" INSTALL_MOD_STRIP=1 modules_install
 rm -f "${STAGE}/lib/modules/${KVER}/build" "${STAGE}/lib/modules/${KVER}/source"
 
@@ -126,10 +126,13 @@ EOF
 # Split image (gzip(Image) + DTB), for convenience/debugging; the flash
 # pipeline reads from the boot deployment.
 # `make Image.gz` is normally enough; gzip fallback keeps this step robust.
+if [ ! -f arch/arm64/boot/Image.gz ]; then
+    gzip -9 -c arch/arm64/boot/Image > arch/arm64/boot/Image.gz
+fi
 
-cat arch/arm64/boot/vmlinuz \
+cat arch/arm64/boot/Image.gz \
     arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dtb \
-    > "${OUT_DIR}/vmlinuz-dtb_spacewar"
+    > "${OUT_DIR}/Image.gz-dtb_spacewar"
 
 # ---- 5. Package --------------------------------------------------------------
 cd "${STAGE}"
