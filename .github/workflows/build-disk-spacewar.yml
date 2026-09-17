@@ -82,7 +82,7 @@ jobs:
           set -euxo pipefail
           export CCACHE_DIR=/home/runner/.ccache
           export PATH="/usr/lib/ccache:$PATH"
-          ./kernel-spacewar/build.sh "$PWD/kernel-spacewar/out"
+          bash ./kernel-spacewar/build.sh "$PWD/kernel-spacewar/out"
 
       - name: Push kernel image
         id: kernel
