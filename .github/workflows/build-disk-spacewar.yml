@@ -371,7 +371,7 @@ jobs:
           set -euxo pipefail
           ROOT_PART="${{ inputs.root_partition_name }}"
           [ "${{ inputs.boot_mode }}" != "single" ] || ROOT_PART=userdata
-          sudo ./post_process/export-fastboot-images.sh \
+          sudo bash ./post_process/export-fastboot-images.sh \
             --device sm7325-nothing-spacewar \
             --raw output/image/disk.raw \
             --out output/fastboot \
